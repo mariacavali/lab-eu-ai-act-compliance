@@ -21,3 +21,8 @@ This repository contains everything you need for this lab.
 - Keep this repository scoped to this lab only — no unrelated projects or personal files.
 - Use clear, descriptive filenames.
 - Remove secrets, API keys, and tokens before committing.
+
+## Submission
+
+- `private-answer-key.md` — four authored client scenarios with intended classifications and rationale
+- `approval-pack.md` — consulting classification, architecture, role map, controls, decisions, and debrief section
