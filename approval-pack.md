@@ -122,6 +122,13 @@ Approve
 ## Client Discussion / Debrief
 
 ### What changed after the client discussion?
-Pending partner discussion. The final note will compare the intended category with the consultant classification and record any clarification, challenge, or redesign agreed with the client.
+The comparison confirmed the four initial classifications, so no risk categories changed.
+
+- Case 1 was confirmed as prohibited. The proposed workplace engagement scoring should not proceed in its current form; the recommendation remains to redesign it around non-biometric operational signals rather than facial or voice-based emotional inference.
+- Case 2 was confirmed as high-risk because the system influences access to employment. Human override does not remove the high-risk classification, so the recommendation remains approval only with the required controls.
+- Case 3 was confirmed as a transparency case. The final design should make the AI disclosure visible at the start of the customer interaction and retain a clear route to human support.
+- Case 4 was confirmed as minimal risk. Human review remains in place and no additional high-risk AI Act controls were identified.
+
+The discussion therefore did not change the classifications, but it clarified the operational boundaries and controls required before deployment.
 
 For a real deployment, final legal interpretation should be validated by qualified legal counsel.
