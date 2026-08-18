@@ -1,134 +1,148 @@
 # EU AI Act Approval Pack
 
 ## Executive Summary
-The four scenarios span the main EU AI Act outcomes: one prohibited use, one high-risk employment case, one transparency-focused consumer assistant, and one low-risk productivity tool. The main issues are whether the system infers sensitive employee states, whether it affects access to work, whether users are clearly told they are interacting with AI, and whether the low-risk tool remains bounded and human-reviewed.
+The four partner briefs cover the main EU AI Act outcomes in a realistic consulting exercise: one prohibited workplace emotion-recognition system, one high-risk recruitment ranking system, one limited-risk customer support assistant that needs clear transparency, and one low-risk operational demand-forecasting tool. The review focuses on the legal risk created by the system design, the people affected, the human-review point, and the practical controls required before deployment.
 
-## Case 1
+## Brief A — Call-centre employee analysis
+
 ### Client use case
-A fashion retailer wants an internal dashboard for managers that combines attendance, meeting activity, and manager notes with a score meant to indicate how engaged each employee or team appears during internal video briefings. The score is used to identify where coaching or support may be needed.
+A European call-centre operator is experiencing high employee turnover and wants managers to identify staff who may be disengaged or under excessive stress. The proposed system would analyse employees’ facial movements, tone of voice and speaking patterns during customer calls. It would estimate emotional states such as frustration, nervousness and enthusiasm. Managers would receive weekly employee scores that could influence coaching, shift allocation and performance discussions. A manager would review the scores before taking action, but employees could not opt out while working.
 
 ### Likely AI Act category
 Prohibited
 
 ### Why
-The proposed design attempts to infer emotional or engagement states from employee behaviour, especially face and voice signals, and then uses that output to influence managerial decisions about support. This is inconsistent with the EU AI Act’s ban on workplace emotion recognition and similar prohibited practices under Article 5.
+The proposed system infers employees’ emotional states from facial and voice-related signals in a workplace context. That falls squarely into the Article 5 prohibition on workplace emotion-recognition systems, even if a manager reviews the results before taking action. Human review does not make an otherwise prohibited practice acceptable.
 
-### Proposed AI architecture
-- Business trigger: manager review of team engagement and support needs.
-- Input data/signals: employee video frames, voice patterns, attendance, and internal meeting metadata.
-- Model/system behaviour: infer engagement or emotional state and generate a score for each employee or team.
-- Human review point: manager sees score and may decide on intervention.
-- Output/decision: employee or team support recommendations.
-- Logging / record layer: no lawful use here; the system should not be used for this purpose.
+### Proposed architecture / lawful redesign
+Do not design or operate the prohibited emotion-recognition system. Instead, use a lawful redesign based on non-emotion-inference operational indicators:
+- trigger: workforce wellbeing and retention review
+- inputs: voluntary employee feedback, workload indicators, absence and attendance patterns, aggregated service metrics, and operational performance data
+- no facial-expression emotion inference
+- no voice-based emotion inference
+- manager reviews aggregated indicators rather than inferred emotional scores
+- output: support or coaching recommendation, not an emotional state score
+- privacy controls: limited access, retention limits, employee notice, and lawful handling of any voluntary feedback
 
 ### Role map
-- Provider: likely the software vendor building the employee analytics system.
-- Deployer: the retailer as the employer using the system internally.
-- Third-party vendor: possible video analytics or HR-tech partner if outsourced.
+- Provider: likely the AI vendor or workforce-analytics platform that would have built the emotion-scoring system
+- Deployer: the call-centre operator as the employer
+- Third-party vendor: possible workforce analytics or monitoring partner, if outsourced
 
 ### Required obligations / controls
-This design cannot launch as proposed. A lawful redesign should replace employee emotion or engagement inference with non-biometric operational signals such as voluntary pulse surveys, workload indicators, meeting participation, or aggregated workflow metrics. The redesign should avoid inferring emotions from faces or voices.
+The proposed system should not launch as designed. A lawful redesign must remove facial or voice-based emotion inference and rely instead on non-biometric operational metrics and voluntary employee feedback. Appropriate privacy and data-protection controls are essential because employee monitoring and personal data are involved.
 
 ### Decision
 Deny and redesign
 
-## Case 2
+## Brief B — Recruitment ranking
+
 ### Client use case
-A recruitment agency receives many applications for hospitality jobs and wants AI to rank applicants using CVs, written answers, and employment history. Recruiters normally interview candidates above a threshold, but they can review and override the ranking.
+A European recruitment agency receives thousands of applications for entry-level positions and wants to reduce the time recruiters spend reviewing candidates. A vendor proposes a system that analyses CVs, application answers and written skills tests. It ranks applicants and recommends which candidates should proceed to interview. Recruiters can change the ranking, but normally begin with the AI-generated shortlist. Applicants are affected through access to employment opportunities.
 
 ### Likely AI Act category
 High-risk
 
 ### Why
-This affects access to employment, which is a protected Annex III area. The risk is not only in the final decision but also in how the system shapes who is shortlisted and interviewed.
+This is an employment and recruitment use under the AI Act high-risk framework, specifically Annex III. The ranking materially influences access to employment, and human override is an important safeguard but does not automatically make the system non-high-risk.
 
 ### Proposed AI architecture
-- Business trigger: hiring pipeline review for hospitality roles.
-- Input data/signals: CV text, application answers, employment history, and candidate metadata.
-- Model/system behaviour: rank applicants by predicted suitability for the role.
-- Human review point: recruiters review shortlist and can override the ranking.
-- Output/decision: shortlist and interview recommendation.
-- Logging / record layer: maintain candidate-level decision logs, model version history, and override records.
+- application received
+- CV/application/test data prepared for review
+- AI ranking model produces candidate recommendation
+- meaningful recruiter review of the shortlist and ranking
+- recruiter can approve, reject, override or escalate the recommendation
+- final interview decision made by the recruiter
+- logging: candidate-level decision logs, ranking audit trail, override reasons, and model version history
 
 ### Role map
-- Provider: AI vendor or model developer supplying the ranking system.
-- Deployer: recruitment agency using the system for hiring.
-- Third-party vendor: may include ATS or staffing software provider.
+- Provider: third-party recruitment AI vendor
+- Deployer: European recruitment agency
+- Third-party vendor: optional ATS or assessment platform, if used
 
 ### Required obligations / controls
-The deployer should implement meaningful human oversight, a documented risk management process, data governance, logging, instructions to staff, accuracy and robustness checks, cybersecurity controls, documentation, and monitoring. The provider has duties linked to the system as supplied, while the deployer has duties linked to real-world deployment and oversight. Recruiters must be able to override or disregard a recommendation.
+Relevant controls include meaningful human oversight, risk management, data governance, appropriate logging and record keeping, instructions and transparency, accuracy, robustness, cybersecurity, monitoring, and a documented override and escalation process. The recruitment agency should also implement deployer obligations appropriate to the hiring process. Provider and deployer responsibilities should be distinguished rather than assigned to the agency by default.
 
 ### Decision
 Approve with controls
 
-## Case 3
+## Brief C — Furniture retailer conversational AI
+
 ### Client use case
-An online beauty retailer wants an AI-powered shopping assistant that helps customers choose products and skincare routines based on their concerns, skin type, and preferences. Customers can also reach a human support agent. The assistant should feel conversational and natural.
+An online furniture retailer wants customer support outside normal working hours. A third-party conversational AI would answer product questions, recommend products and explain delivery and return policies. It would use the retailer’s product catalogue, customer questions and, when the customer is signed in, order information. Difficult complaints and refund requests would be transferred to a human employee. The company wants the AI assistant to use a human first name because it believes customers will engage with it more naturally.
 
 ### Likely AI Act category
 Limited risk / transparency
 
 ### Why
-The core issue is customer interaction with AI, so the main legal focus is transparency under Article 50. The assistant is not deciding employment or other high-risk outcomes, but it should not mislead users about whether they are speaking to a human or an AI system.
+Customers are interacting directly with an AI system. Because the company wants the assistant to use a human first name, a clear AI disclosure is especially important so users are not misled into thinking they are speaking to a human. The key issue therefore sits in the transparency obligations, not in a high-risk decision context.
 
 ### Proposed AI architecture
-- Business trigger: customer asks for product or skincare advice.
-- Input data/signals: skin type, concerns, product preferences, and conversation history.
-- Model/system behaviour: generate recommendations and routine suggestions.
-- Human review point: human support agent available for escalation and exception handling.
-- Output/decision: product suggestions and advice.
-- Logging / record layer: limited conversation logging for service quality, complaint handling, and privacy controls.
+- customer opens support chat
+- clear AI disclosure at the start of the interaction
+- inputs: product catalogue, customer questions and signed-in order information where relevant
+- conversational AI responds with product and policy guidance
+- difficult complaint or refund queries escalate to a human employee
+- logging/privacy layer: limited conversation logs, access controls, retention limits, and privacy review for signed-in customer data
 
 ### Role map
-- Provider: LLM vendor or system integrator.
-- Deployer: retailer operating the customer assistant.
-- Third-party vendor: optional AI platform or support tool provider.
+- Provider: third-party conversational AI provider/vendor
+- Deployer: furniture retailer
+- Additional vendors: none required unless the retailer uses a separate support platform, which would need to be identified as an assumption
 
 ### Required obligations / controls
-The assistant must clearly disclose that the user is interacting with AI, and the platform should provide a straightforward path to a human agent. Advice boundaries should be defined, especially for medical or sensitive skincare claims. If personal data is processed, GDPR/privacy controls should be checked, including purpose limitation, minimisation, consent or lawful basis, and retention limits. Logging should be proportionate and relevant to service quality or complaint management.
+The system should be approved with controls. These include a clear AI disclosure at the beginning of the interaction, a clear human escalation path, defined boundaries for automated support, and GDPR/privacy safeguards for signed-in order information. Appropriate access controls and proportionate retention/logging rules should also be in place.
 
 ### Decision
 Approve with controls
 
-## Case 4
+## Brief D — Bakery demand forecasting
+
 ### Client use case
-A photography studio wants AI to organise uploaded images into groups such as portraits, interiors, products, and landscapes. The photographer reviews the folders and can reorganise them manually before publishing or storing assets.
+A regional bakery chain wants to reduce food waste by forecasting how many products each shop should prepare every morning. The system analyses previous sales, public weather information, holidays and store location. It recommends production quantities for bread and pastries. Store managers review the recommendation and can change it using local knowledge. The system does not evaluate employees or customers and does not use personal data.
 
 ### Likely AI Act category
 Minimal risk
 
 ### Why
-This is a standard productivity and organisation use case. It does not determine access to employment, education, credit, public benefits, justice, or other consequential services, so there is no specific high-risk AI Act obligation triggered by the use case itself.
+This is an operational demand-forecasting system rather than a consequential decision about individuals. It forecasts production quantities and does not determine access to employment, credit, public services, education, justice or other high-impact opportunities.
 
 ### Proposed AI architecture
-- Business trigger: image upload for cataloguing and studio workflow.
-- Input data/signals: photo files, metadata, and manually assigned tags.
-- Model/system behaviour: classify images into folders such as portraits, products, and landscapes.
-- Human review point: photographer reviews and reorganises folders.
-- Output/decision: image grouping recommendations.
-- Logging / record layer: optional operational logs for quality checks and user corrections.
+- daily forecast trigger
+- historical sales, weather, holidays and store location as inputs
+- forecasting model generates a production recommendation
+- store manager reviews and can override the recommendation using local knowledge
+- final output: production quantities for bread and pastries
+- operational controls: data quality checks, forecast performance monitoring, human override, and basic operational logging
 
 ### Role map
-- Provider: AI tool vendor or image-classification platform.
-- Deployer: photography studio.
-- Third-party vendor: optional storage or image workflow partner.
+- Provider: forecasting tool vendor or internal analytics team, if built in-house
+- Deployer: bakery chain operating the forecast
+- Third-party vendor: optional analytics platform or data provider if used
 
 ### Required obligations / controls
-This case can usually be approved. It should still be checked for GDPR, confidentiality, consumer protection, copyright, and contractual issues where relevant, but no specific high-risk AI Act obligations are triggered by the scenario as described.
+Controls should be proportionate. Data quality checks, forecast performance monitoring, clear manager override rights, and basic operational logging are sufficient. No high-risk AI Act obligations are implied by the scenario as described, although general laws may still be relevant where applicable.
 
 ### Decision
 Approve
 
 ## Client Discussion / Debrief
 
-### What changed after the client discussion?
-The comparison confirmed the four initial classifications, so no risk categories changed.
+### Partner review process
+This lab was completed as a paired exercise. I first created four hidden client scenarios and shared the partner-facing versions for independent classification. I then received a separate set of four client briefs from my partner and reviewed them as the consultant.
 
-- Case 1 was confirmed as prohibited. The proposed workplace engagement scoring should not proceed in its current form; the recommendation remains to redesign it around non-biometric operational signals rather than facial or voice-based emotional inference.
-- Case 2 was confirmed as high-risk because the system influences access to employment. Human override does not remove the high-risk classification, so the recommendation remains approval only with the required controls.
-- Case 3 was confirmed as a transparency case. The final design should make the AI disclosure visible at the start of the customer interaction and retain a clear route to human support.
-- Case 4 was confirmed as minimal risk. Human review remains in place and no additional high-risk AI Act controls were identified.
+### Review of the partner briefs
+Brief A was classified as prohibited because it infers employee emotional states from facial and voice-related signals in the workplace. The proposed design should therefore be denied and redesigned without emotion inference.
 
-The discussion therefore did not change the classifications, but it clarified the operational boundaries and controls required before deployment.
+Brief B was classified as high-risk because AI ranking materially influences candidates' access to employment. Human recruiter review remains necessary but does not remove the high-risk classification.
+
+Brief C was classified as a transparency case because customers interact directly with conversational AI. The use of a human first name makes a clear AI disclosure at the beginning of the interaction especially important.
+
+Brief D was classified as minimal risk because the AI forecasts bakery production quantities and does not evaluate individuals or determine access to consequential opportunities.
+
+### Partner classification of my hidden cases
+My partner independently classified the four scenarios I originally authored. The classifications were then compared with my private answer key as part of the discussion.
+
+The comparison highlighted the importance of checking the underlying scenario facts rather than relying only on case letters when discussing classifications.
 
 For a real deployment, final legal interpretation should be validated by qualified legal counsel.
